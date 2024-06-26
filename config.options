@@ -11,7 +11,7 @@ AnalogTriggerMapping.value int_size:IS_8
 
 AnalogModifier.buttons int_size:IS_8
 AnalogModifier.buttons max_count:3
-AnalogModifier.axis int_size:IS_8
+AnalogModifier.axis_modifiers max_count:6
 AnalogModifier.combination_mode int_size:IS_8
 
 ButtonComboMapping.buttons int_size:IS_8

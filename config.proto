@@ -146,7 +146,7 @@ enum GameModeId {
  * Gamemode identifier.
  *
  * Indicates to the firmware which communication backend class to switch to when activating a
- * [CommunicationBackendConfig].
+ * [CommunicationBackendConfig](#communicationbackendconfig).
  */
 enum CommunicationBackendId {
   // No backend specified.
@@ -253,7 +253,7 @@ enum AnalogTrigger {
  * Specifies the behaviour when multiple modifiers are applied to the same axis.
  */
 enum ModifierCombinationMode {
-  // No combination mode specified - currently defaults to COMBINATION_MODE_COMPOUND.
+  // No combination mode specified - currently defaults to COMBINATION_MODE_OVERRIDE.
   COMBINATION_MODE_UNSPECIFIED = 0;
   // Compound combination mode - modifiers applying to the same axis stack with each other
   // multiplicatively.
@@ -308,12 +308,13 @@ message AnalogTriggerMapping {
 message AnalogModifier {
   // A list of buttons that must all be pressed simultaneously to activate this modifier.
   repeated Button buttons = 1;
-  // The analog axis to modify.
-  AnalogAxis axis = 2;
-  // The multiplier to apply to axis.
-  float multiplier = 3;
-  // The resolution behaviour to use when multiple modifiers are applied to the same axis.
-  ModifierCombinationMode combination_mode = 4;
+  // An ordered list of multipliers to apply to analog axes, following the same order of the axes in
+  // [AnalogAxis](#analogaxis) (i.e. first value in this list is applied as a modifier to
+  // AXIS_LSTICK_X, second value is appled to AXIS_LSTICK_Y, and so on).
+  repeated float axis_multipliers = 2;
+  // The resolution behaviour to use when multiple modifiers are applied to the
+  // same axis.
+  ModifierCombinationMode combination_mode = 3;
 }
 
 /**
@@ -488,7 +489,6 @@ message ProjectMOptions {
   /**
    * Set to true to make a Z input (mapped to RF3 by default) output an actual Z button press rather
    * than the default analog shield + A grab macro.
-   * 
    * The default macro behaviour allows you to L cancel with Z without being locked out of tech,
    * and true Z is still accessible by pressing Mod X (mapped to LT2 by default) and Z at the same
    * time.
