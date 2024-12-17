@@ -140,6 +140,8 @@ enum GameModeId {
   // Custom gamemode - a [GameModeConfig](#gamemodeconfig) using this mode id must set
   // GameModeConfig.custom_mode_config to reference a [CustomModeConfig](#custommodeconfig).
   MODE_CUSTOM = 7;
+  // Built-in Rivals of Aether 2 mode.
+  MODE_RIVALS_2 = 8;
 }
 
 /**
